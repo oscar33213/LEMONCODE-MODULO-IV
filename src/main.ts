@@ -36,8 +36,8 @@ function formatearTurno(turno: number): string {
 }
 
 function mostrarTurno(clinica: Clinica): void {
-  let numeroTurno = document.querySelector(".numero-turno");
-  if (numeroTurno) {
+  const numeroTurno = document.querySelector<HTMLSpanElement>(".numero-turno");
+  if (numeroTurno !== null) {
     numeroTurno.textContent = formatearTurno(clinica.turno);
   }
 }
@@ -46,15 +46,20 @@ function mostrarTurno(clinica: Clinica): void {
 const clinica: Clinica = crearClinica();
 
 // Manejador de evento para el botón Siguiente
-document.getElementById("siguiente")?.addEventListener("click", function () {
-  siguienteTurno(clinica);
-});
+const botonSiguiente = document.getElementById("siguiente");
+if (botonSiguiente instanceof HTMLButtonElement) {
+  botonSiguiente.addEventListener("click", function () {
+    siguienteTurno(clinica);
+  });
+}
 
 // Manejador de evento para el botón Anterior
-document.getElementById("anterior")?.addEventListener("click", function () {
-  anteriorTurno(clinica);
-});
+const botonAnterior = document.getElementById("anterior");
+if (botonAnterior instanceof HTMLButtonElement) {
+  botonAnterior.addEventListener("click", function () {
+    anteriorTurno(clinica);
+  });
+}
 
 // Inicializar la interfaz de usuario
 mostrarTurno(clinica);
-
