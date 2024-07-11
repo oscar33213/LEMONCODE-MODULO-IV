@@ -1,7 +1,8 @@
-type Clinica = {
+interface Clinica {
   turno: number;
-};
+}
 
+// Función para crear una clínica
 function crearClinica(): Clinica {
   return {
     turno: 0,
@@ -35,17 +36,14 @@ function formatearTurno(turno: number): string {
 }
 
 function mostrarTurno(clinica: Clinica): void {
-  console.log(`Turno actual: ${formatearTurno(clinica.turno)}`);
+  let numeroTurno = document.querySelector(".numero-turno");
+  if (numeroTurno) {
+    numeroTurno.textContent = formatearTurno(clinica.turno);
+  }
 }
 
 // Crear una instancia de la clínica
 const clinica: Clinica = crearClinica();
-
-// Función para simular la interfaz de usuario
-function interfazUsuario(): void {
-  console.log("--- Clínica ---");
-  mostrarTurno(clinica);
-}
 
 // Manejador de evento para el botón Siguiente
 document.getElementById("siguiente")?.addEventListener("click", function () {
@@ -57,5 +55,6 @@ document.getElementById("anterior")?.addEventListener("click", function () {
   anteriorTurno(clinica);
 });
 
-// Ciclo principal del programa
-interfazUsuario();
+// Inicializar la interfaz de usuario
+mostrarTurno(clinica);
+
